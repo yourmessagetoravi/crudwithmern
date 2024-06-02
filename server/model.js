@@ -1,26 +1,23 @@
-//we are writing schema for the database
 const mongoose = require('mongoose');
 
-const Students = mongoose.Schema({
-    sname:String,
-    age:Number,
-    grade:String,
+// Define the Student schema
+const StudentSchema = mongoose.Schema({
+    sname: { type: String, required: true },
+    age: { type: Number, required: true },
+    grade: { type: String, required: true },
 });
 
-// User Registration Schema
-// const userSchema = mongoose.Schema({
-//     username: String,
-//     password: String,
-// });
+// Define the RegisteredUser schema
+const RegisteredUserSchema = mongoose.Schema({
+    username: { type: String, required: true },
+    email: { type: String, required: true },
+    password: { type: String, required: true },
+    confirmPassword: { type: String, required: true },
+});
 
-//export two schemas seperately
-const Student = mongoose.model("Student", Students);
-// const User = mongoose.model("User", userSchema);
+// Create the models
+const Student = mongoose.model("Student", StudentSchema);
+const RegisteredUser = mongoose.model("RegisteredUser", RegisteredUserSchema);
 
-//module.exports = mongoose.model("Student",studentSchema);
-
-//if you write only one schema above line of code woks
-//we are creating two schemas so that we can move both schemaas
-//two seperate variables and export both schemas
-
-module.exports = Student;
+// Export the models
+module.exports = { Student, RegisteredUser };
